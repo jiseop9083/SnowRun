@@ -5,11 +5,18 @@ import databases
 import sqlalchemy
 from passlib.context import CryptContext
 from sqlalchemy import select
+from starlette.config import Config
 
 # 데이터베이스 관련 모듈
 import mysql.connector
 import httpx
 
+config = Config(".env")
+DB_USERNAME = config("DB_USERNAME")
+DB_PASSWORD = config("DB_PASSWORD")
+DB_HOST = config("DB_HOST")
+DB_PORT = config("DB_PORT")
+DB_NAME = config("DB_NAME")
 
 # FastAPI 앱 인스턴스 생성
 app = FastAPI(host='192.249.19.234', port=80)
@@ -19,7 +26,7 @@ def read_root():
     return {"Hello":"World"}
 
 # 데이터베이스 설정
-DATABASE_URL = "mysql+pymysql://jalee0201:1234@172.10.7.75:80/sys"
+DATABASE_URL = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
 
@@ -31,6 +38,7 @@ users = sqlalchemy.Table(
     sqlalchemy.Column("user_id", sqlalchemy.String(50), unique=True),
     sqlalchemy.Column("hashed_password", sqlalchemy.Text),
 )
+#ddfdf
 
 max_scores = sqlalchemy.Table(
     "max_scores",
