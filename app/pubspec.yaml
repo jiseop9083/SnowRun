@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flame: ^1.14.0
   flame_tiled: ^1.18.3
+  flame_audio: ^2.1.7
 
 dev_dependencies:
   flutter_test:
@@ -30,5 +31,6 @@ flutter:
     - assets/images/tileSet.png
     - assets/images/snowman_idle.png
     - assets/images/snowman_jump.png
+    - assets/audio/main_bgm.mp3
   
 

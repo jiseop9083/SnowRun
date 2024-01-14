@@ -5,8 +5,10 @@ import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
+
 import 'package:app/map/level.dart';
 import 'package:app/entity/Player.dart';
+import 'package:app/util/AudioManager.dart';
 
 class SnowManGame extends FlameGame with TapCallbacks {
   late final CameraComponent cam;
@@ -14,6 +16,7 @@ class SnowManGame extends FlameGame with TapCallbacks {
   final world = Level();
 
   late Player player;
+  AudioManager audioManager = AudioManager();
 
   @override
   FutureOr<void> onLoad() async {
@@ -25,6 +28,8 @@ class SnowManGame extends FlameGame with TapCallbacks {
     );
 
     addAll([cam, world, player]);
+    audioManager.initialize();
+    audioManager.playMainBGM();
     //player.onLoad();
     return super.onLoad();
   }

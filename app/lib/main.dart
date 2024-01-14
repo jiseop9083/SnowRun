@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:app/game_screen.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+
+import 'package:app/game_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
