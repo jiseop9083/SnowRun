@@ -42,10 +42,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-app/macos
-app/linux
-app/web
-app/windows
 
 #database
 .env
