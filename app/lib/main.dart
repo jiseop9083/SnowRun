@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:app/game_screen.dart';
 import 'package:flame/flame.dart';
@@ -9,5 +10,5 @@ void main() {
   Flame.device.setLandscape();
 
   SnowManGame game = SnowManGame();
-  runApp(GameWidget(game: game));
+  runApp(GameWidget(game: kDebugMode ? SnowManGame() : game));
 }
