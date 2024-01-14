@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 
-enum PlayerState { idle, jump, walk }
+enum PlayerState { idle, jump, walk, melt }
 
 class Player extends SpriteAnimationComponent with HasGameRef {
   MoveWithGravity gravity = MoveWithGravity();
@@ -28,6 +28,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   late final SpriteAnimation _idleAnimation;
   late final SpriteAnimation _jumpAnimation;
   late final SpriteAnimation _walkAnimation;
+  late final SpriteAnimation _meltAnimation;
 
   Player({position})
       : super(
@@ -52,14 +53,14 @@ class Player extends SpriteAnimationComponent with HasGameRef {
     super.update(dt);
     velocity.x = moveDirection == 0 ? velocity.x : moveDirection * moveVelocity;
     position = gravity.update(position, velocity, acceleration);
-    if (animationMode != PlayerState.idle &&
+    if (animationMode != PlayerState.melt &&
         velocity.x == 0 &&
         velocity.y == 0) {
-      animationMode = PlayerState.idle;
+      animationMode = PlayerState.melt;
       isAnimationChanged = true;
     }
     if (moveDirection != 0) {
-      animationMode = PlayerState.walk;
+      animationMode = PlayerState.walk; // idle
       isAnimationChanged = true;
     }
     if (isFacingRight && moveDirection < 0) {
@@ -106,6 +107,11 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       srcSize: Vector2(64, 64),
     );
 
+    final meltSpriteSheet = SpriteSheet(
+      image: await gameRef.images.load('snowman_melt.png'),
+      srcSize: Vector2(64, 64),
+    );
+
     _idleAnimation = idleSpriteSheet.createAnimation(
       row: 0,
       loop: true,
@@ -117,7 +123,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       row: 0,
       loop: false,
       stepTime: 0.2,
-      to: 10,
+      to: 11,
     );
 
     _walkAnimation = walkSpriteSheet.createAnimation(
@@ -127,10 +133,18 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       to: 3,
     );
 
+    _meltAnimation = meltSpriteSheet.createAnimation(
+      row: 0,
+      loop: false,
+      stepTime: 0.7,
+      to: 7,
+    );
+
     animations = {
       PlayerState.idle: _idleAnimation,
       PlayerState.jump: _jumpAnimation,
-      PlayerState.walk: _walkAnimation
+      PlayerState.walk: _walkAnimation,
+      PlayerState.melt: _meltAnimation
     };
   }
 }

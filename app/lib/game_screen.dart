@@ -1,15 +1,19 @@
 // game_screen.dart
 import 'dart:async';
-
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
+import 'package:leap/leap.dart';
 
 import 'package:app/map/level.dart';
 import 'package:app/entity/Player.dart';
 //import 'package:app/util/AudioManager.dart';
 
-class SnowManGame extends FlameGame with TapCallbacks {
+class SnowManGame extends LeapGame with TapCallbacks {
+  SnowManGame({
+    required super.tileSize,
+  });
+
   late final CameraComponent cam;
   Player player = Player();
 
@@ -17,10 +21,15 @@ class SnowManGame extends FlameGame with TapCallbacks {
 
   @override
   FutureOr<void> onLoad() async {
-    final world = Level(player: player);
+    await super.onLoad();
 
+    // Default the camera size to the bounds of the Tiled map.
+    final world = Level(player: player);
     cam = CameraComponent.withFixedResolution(
-        world: world, width: 640, height: 360);
+      world: world,
+      width: tileSize * 40,
+      height: tileSize * 23,
+    );
     cam.viewfinder.anchor = Anchor.topLeft;
 
     addAll([cam, world]); //player
