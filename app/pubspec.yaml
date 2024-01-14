@@ -27,4 +27,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/tiles/
+    - assets/images/tileSet.png
+    - assets/images/snowman_idle.png
+    - assets/images/snowman_jump.png
+  
 
