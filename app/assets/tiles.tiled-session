@@ -3,18 +3,138 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/snowTile.tsx",
+    "activeFile": "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_atmos_forest_2.tsx",
     "expandedProjectPaths": [
         "tiles",
         "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
-        "tiles/Level-01.tmx": {
-            "scale": 1.056875,
-            "selectedLayer": 0,
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_deathDrown.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_deathFaint.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_deathPit.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_edgeGrab.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_flap.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_idle.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_jump.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_run.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_slide.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_enemy_beetle.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_enemy_butterfly.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_fx_large.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_fx_small.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_item_egg.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_item_feather.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_phoenixDash_doublejump.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_phoenixDash_idle.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_phoenixDash_jump.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_phoenixDash_run.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_poof.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_poof_orange.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/flutter_runnergame_map_A.tmx": {
+            "expandedGroupLayers": [
+                20
+            ],
+            "scale": 0.75,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 298.0484920165582,
-                "y": 170.31342400946184
+                "x": 4307.333333333333,
+                "y": 1772.6666666666665
+            }
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/flutter_runnergame_map_B.tmx": {
+            "expandedGroupLayers": [
+                31
+            ],
+            "scale": 1.5,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 2083,
+                "y": 2225
+            }
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/objects/tile_enemies_v2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/objects/tile_forest_trees_back_v02.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/objects/tile_forest_trees_front_v02.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/objects/tile_items_v2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_atmos_forest_2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_decorations_v01.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_forest_bushes_v02.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_forest_bushes_v03.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_forest_ground_v04.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_treehouse.tsx": {
+            "scaleInDock": 1
+        },
+        "tiles/Level-01.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 343.5,
+                "y": 221.5
             }
         },
         "tiles/snowTile.tsx": {
@@ -29,12 +149,16 @@
     "map.tileWidth": 16,
     "map.width": 40,
     "openFiles": [
-        "tiles/snowTile.tsx"
+        "tiles/snowTile.tsx",
+        "tiles/Level-01.tmx",
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_atmos_forest_2.tsx"
     ],
     "project": "tiles.tiled-project",
     "recentFiles": [
         "tiles/snowTile.tsx",
-        "tiles/Level-01.tmx"
+        "tiles/Level-01.tmx",
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_atmos_forest_2.tsx",
+        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/flutter_runnergame_map_A.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

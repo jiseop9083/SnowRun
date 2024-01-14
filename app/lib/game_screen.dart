@@ -2,35 +2,30 @@
 import 'dart:async';
 
 import 'package:flame/events.dart';
-import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 
 import 'package:app/map/level.dart';
 import 'package:app/entity/Player.dart';
-import 'package:app/util/AudioManager.dart';
+//import 'package:app/util/AudioManager.dart';
 
 class SnowManGame extends FlameGame with TapCallbacks {
   late final CameraComponent cam;
+  Player player = Player();
 
-  final world = Level();
-
-  late Player player;
-  AudioManager audioManager = AudioManager();
+  //AudioManager audioManager = AudioManager();
 
   @override
   FutureOr<void> onLoad() async {
+    final world = Level(player: player);
+
     cam = CameraComponent.withFixedResolution(
         world: world, width: 640, height: 360);
     cam.viewfinder.anchor = Anchor.topLeft;
-    player = Player(
-      position: Vector2(size.x * 0.75, 0),
-    );
 
-    addAll([cam, world, player]);
-    audioManager.initialize();
-    audioManager.playMainBGM();
-    //player.onLoad();
+    addAll([cam, world]); //player
+    // audioManager.initialize();
+    // audioManager.playMainBGM();
     return super.onLoad();
   }
 
@@ -68,14 +63,4 @@ class SnowManGame extends FlameGame with TapCallbacks {
     super.update(dt);
     player.update(dt);
   }
-
-  // @override
-  // void render(Canvas canvas) {
-  //   super.render(canvas);
-  //   cam.render(canvas);
-  //   player.render(canvas);
-
-  //   // 다른 그래픽 요소들을 그릴 수 있습니다.
-  //   // 예: drawRect, drawCircle 등
-  // }
 }

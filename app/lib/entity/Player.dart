@@ -3,40 +3,91 @@ import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 
+enum PlayerState { idle, jump, walk }
+
 class Player extends SpriteAnimationComponent with HasGameRef {
-  static const playerSize = 128.0;
   MoveWithGravity gravity = MoveWithGravity();
   Vector2 velocity = Vector2(0, 0);
   Vector2 acceleration = Vector2(0, 0);
-  double moveVelocity = 3;
+
+  late PlayerState animationMode;
+  var animations = {};
+
+  //constant
+  double moveVelocity = 1.8;
+  static const playerSize = 128.0;
+  double jumpPower = -3.0;
+
+  // isState
   bool isJump = false;
+  bool isFacingRight = true;
+  bool isAnimationChanged = false;
   int moveDirection = 0;
-  late String animationMode;
 
   // animations
   late final SpriteAnimation _idleAnimation;
   late final SpriteAnimation _jumpAnimation;
+  late final SpriteAnimation _walkAnimation;
 
-  Player({
-    required position,
-    Color color = const Color(0xffffff00),
-  }) : super(
+  Player({position})
+      : super(
           position: position,
           size: Vector2.all(playerSize),
           anchor: Anchor.bottomCenter,
-          paint: Paint()..color = color,
         ) {
-    animationMode = 'idle';
+    animationMode = PlayerState.idle;
   }
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
     await _loadAnimations();
-    animation = _idleAnimation;
-    animationMode = 'idle';
-    // sprite = await gameRef.loadSprite('snowman.png');
-    position = gameRef.size / 2;
+
+    animationMode = PlayerState.idle;
+    isAnimationChanged = true;
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    velocity.x = moveDirection == 0 ? velocity.x : moveDirection * moveVelocity;
+    position = gravity.update(position, velocity, acceleration);
+    if (animationMode != PlayerState.idle &&
+        velocity.x == 0 &&
+        velocity.y == 0) {
+      animationMode = PlayerState.idle;
+      isAnimationChanged = true;
+    }
+    if (moveDirection != 0) {
+      animationMode = PlayerState.walk;
+      isAnimationChanged = true;
+    }
+    if (isFacingRight && moveDirection < 0) {
+      flipHorizontallyAroundCenter();
+      isFacingRight = false;
+    }
+    if (!isFacingRight && moveDirection > 0) {
+      flipHorizontallyAroundCenter();
+      isFacingRight = true;
+    }
+    if (position.y == 270) isJump = false;
+    if (isAnimationChanged) {
+      animation = animations[animationMode];
+      isAnimationChanged = false;
+    }
+  }
+
+  void setMoveDirection(int move) {
+    moveDirection = move;
+  }
+
+  void jump() {
+    if (isJump) return;
+    animationMode = PlayerState.jump;
+    isAnimationChanged = true;
+    isJump = true;
+    velocity.y = jumpPower;
+    // temp
   }
 
   Future<void> _loadAnimations() async {
@@ -47,6 +98,11 @@ class Player extends SpriteAnimationComponent with HasGameRef {
 
     final jumpSpriteSheet = SpriteSheet(
       image: await gameRef.images.load('snowman_jump.png'),
+      srcSize: Vector2(64, 64),
+    );
+
+    final walkSpriteSheet = SpriteSheet(
+      image: await gameRef.images.load('snowman_walk.png'),
       srcSize: Vector2(64, 64),
     );
 
@@ -63,31 +119,18 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       stepTime: 0.2,
       to: 10,
     );
-  }
 
-  @override
-  void update(double dt) {
-    super.update(dt);
-    velocity.x = moveDirection == 0 ? velocity.x : moveDirection * moveVelocity;
-    position = gravity.update(position, velocity, acceleration);
-    if (animationMode != 'idle' && velocity.x == 0 && velocity.y == 0) {
-      animationMode = 'idle';
-      animation = _idleAnimation;
-    }
+    _walkAnimation = walkSpriteSheet.createAnimation(
+      row: 0,
+      loop: true,
+      stepTime: 0.5,
+      to: 3,
+    );
 
-    if (position.y == 270) isJump = false;
-  }
-
-  void setMoveDirection(int move) {
-    moveDirection = move;
-  }
-
-  void jump() {
-    if (isJump) return;
-    animationMode = 'jump';
-    animation = _jumpAnimation;
-    isJump = true;
-    velocity.y = -5;
-    // temp
+    animations = {
+      PlayerState.idle: _idleAnimation,
+      PlayerState.jump: _jumpAnimation,
+      PlayerState.walk: _walkAnimation
+    };
   }
 }
