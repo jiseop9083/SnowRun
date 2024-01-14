@@ -46,3 +46,6 @@ app/macos
 app/linux
 app/web
 app/windows
+
+#database
+.env
