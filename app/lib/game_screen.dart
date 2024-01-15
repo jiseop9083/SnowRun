@@ -5,8 +5,8 @@ import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 import 'package:leap/leap.dart';
 
-import 'package:app/map/level.dart';
-import 'package:app/entity/Player.dart';
+import 'package:app/map/Level.dart';
+import 'package:app/Components/Player.dart';
 //import 'package:app/util/AudioManager.dart';
 
 class SnowManGame extends LeapGame with TapCallbacks {
