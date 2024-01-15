@@ -1,15 +1,17 @@
 import 'package:flame/components.dart';
 
-class ColliisionBlock extends PositionComponent {
+class CollisionBlock extends PositionComponent {
   bool isPlatform;
   bool isSlope;
-  ColliisionBlock({
+  int leftTop;
+  int rightTop;
+  CollisionBlock({
     position,
     size,
     this.isPlatform = false,
     this.isSlope = false,
-    leftTop = 16,
-    rightTop = 16,
+    this.leftTop = 16,
+    this.rightTop = 16,
   }) : super(position: position, size: size) {
     debugMode = true; // debugMode
   }

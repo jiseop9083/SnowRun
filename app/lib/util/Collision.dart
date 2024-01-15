@@ -11,10 +11,39 @@ bool checkCollision(player, block) {
   final blockWidth = block.width;
   final blockHeight = block.height;
 
-  final fixedY = block.isPlatform ? playerY + playerHeight : playerY;
+
+  double fixedY;
   // AABB
-  return (fixedY < blockY + blockHeight &&
-      playerY + playerHeight > blockY &&
-      playerX < blockX + blockWidth &&
-      playerX + playerWidth > blockX);
+  // return (fixedY < blockY + blockHeight &&
+  //     playerY + playerHeight > blockY &&
+  //     playerX < blockX + blockWidth &&
+  //     playerX + playerWidth > blockX);
+
+  // final fixedY = block.isPlatform ? playerY + playerHeight : (block.isSlope ? playerY + playerHeight : playerY);
+  if (block.isPlatform){
+    fixedY = playerY + playerHeight;
+    return (fixedY < blockY + blockHeight &&
+            playerY + playerHeight > blockY &&
+            playerX < blockX + blockWidth &&
+            playerX + playerWidth > blockX);
+
+  }
+  else if (block.isSlope){
+    fixedY = playerY + playerHeight;
+    final m = playerX - blockX;
+    final n = blockX + blockWidth - playerX;
+    return (playerY < blockY+blockHeight &&
+            fixedY > (blockY+blockHeight - ((m * block.rightTop + n * block.leftTop) / (m + n))) &&
+            playerX < blockX + blockWidth &&
+            playerX + playerWidth > blockX
+    );
+  }
+  else {
+    fixedY = playerY;
+    return (fixedY < blockY + blockHeight &&
+        playerY + playerHeight > blockY &&
+        playerX < blockX + blockWidth &&
+        playerX + playerWidth > blockX);
+  }
+
 }

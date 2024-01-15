@@ -10,12 +10,11 @@ class Level extends World {
   late Player player;
   Level({required this.player});
   late TiledComponent level;
-  List<ColliisionBlock> collisionBlocks = [];
+  List<CollisionBlock> collisionBlocks = [];
 
   @override
   FutureOr<void> onLoad() async {
     level = await TiledComponent.load('Level-01.tmx', Vector2.all(16));
-    print('ddd');
     add(level);
     final metaDataLayer = level.tileMap.getLayer<ObjectGroup>('Metadata');
     for (final metaData in metaDataLayer!.objects) {
@@ -33,7 +32,7 @@ class Level extends World {
       for (final collision in collisionsLayer!.objects) {
         switch (collision.class_) {
           case 'Platform':
-            final platform = ColliisionBlock(
+            final platform = CollisionBlock(
               position: Vector2(collision.x, collision.y),
               size: Vector2(collision.width, collision.height),
               isPlatform: true,
@@ -49,7 +48,7 @@ class Level extends World {
             final IntProperty rightProperty =
                 properties['rightTop'] as IntProperty;
             int rightTop = rightProperty.value;
-            final block = ColliisionBlock(
+            final block = CollisionBlock(
                 position: Vector2(collision.x, collision.y),
                 size: Vector2(collision.width, collision.height),
                 isPlatform: false,
@@ -60,7 +59,7 @@ class Level extends World {
             add(block);
             break;
           default: //normal block
-            final block = ColliisionBlock(
+            final block = CollisionBlock(
                 position: Vector2(collision.x, collision.y),
                 size: Vector2(collision.width, collision.height),
                 isPlatform: false);
