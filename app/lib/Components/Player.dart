@@ -1,6 +1,5 @@
 import 'package:app/Components/collistion_block.dart';
 import 'package:flame/collisions.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
@@ -12,7 +11,7 @@ enum PlayerState { idle, jump, walk, melt }
 class Player extends SpriteAnimationComponent with HasGameRef {
   Vector2 velocity = Vector2(0, 0);
   Vector2 acceleration = Vector2(0, 0);
-  List<ColliisionBlock> collisionBlocks = [];
+  List<CollisionBlock> collisionBlocks = [];
   PlayerHitbox hitbox =
       PlayerHitbox(offsetX: 40, offsetY: 20, width: 40, height: 95);
 
@@ -62,12 +61,15 @@ class Player extends SpriteAnimationComponent with HasGameRef {
 
   @override
   void update(double dt) {
-    super.update(dt);
+
     _updatePlayerMovement(dt);
-    _checkHorizontalCollistions();
+
     _applyGravity(dt);
     _checkVerticalCollisions();
+    _checkHorizontalCollistions();
+
     _updatePlayerState();
+    super.update(dt);
   }
 
   void setMoveDirection(int move) {
@@ -135,7 +137,20 @@ class Player extends SpriteAnimationComponent with HasGameRef {
 
   void _checkVerticalCollisions() {
     for (final block in collisionBlocks) {
-      if (block.isPlatform) {
+      if (block.isSlope) {
+        if (checkCollision(this, block)) {
+          final playerX = position.x + hitbox.offsetX ;//+ (hitbox.width / 2);
+          if (velocity.y > 0) {
+            double temp = ((( playerX - block.x) * block.rightTop.toDouble() + ( block.x + block.width - playerX) * block.leftTop.toDouble()) / (block.width));
+            // print(temp);
+            velocity.y = 0;
+            position.y = block.y + block.height - temp + (height - hitbox.height - hitbox.offsetY);
+            isOnGround = true;
+            break;
+          }
+        }
+      }
+      else if (block.isPlatform) {
         if (checkCollision(this, block)) {
           if (velocity.y > 0) {
             velocity.y = 0;
