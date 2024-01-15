@@ -42,8 +42,22 @@ class Level extends World {
             add(platform);
             break;
           case 'Slope':
-            // add slope block
-            // final platform =
+            final properties = collision.properties;
+            final IntProperty leftProperty =
+                properties['leftTop'] as IntProperty;
+            int leftTop = leftProperty.value;
+            final IntProperty rightProperty =
+                properties['rightTop'] as IntProperty;
+            int rightTop = rightProperty.value;
+            final block = ColliisionBlock(
+                position: Vector2(collision.x, collision.y),
+                size: Vector2(collision.width, collision.height),
+                isPlatform: false,
+                isSlope: true,
+                leftTop: leftTop,
+                rightTop: rightTop);
+            collisionBlocks.add(block);
+            add(block);
             break;
           default: //normal block
             final block = ColliisionBlock(

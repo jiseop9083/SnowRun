@@ -18,15 +18,15 @@
                 3,
                 10
             ],
-            "scale": 2,
+            "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 410,
-                "y": 488.75
+                "x": 890.9090909090909,
+                "y": -434.84848484848476
             }
         },
         "C:/Users/82102/jiseop/develop/madcamp/temp/leap/examples/standard_platformer/assets/tiles/map.tmx#level_ice_tileset": {
-            "scaleInDock": 1
+            "scaleInDock": 1.5
         },
         "C:/Users/82102/jiseop/develop/madcamp/temp/leap/examples/standard_platformer/assets/tiles/map.tmx#level_standard_tileset": {
             "scaleInDock": 1
