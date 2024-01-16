@@ -4,6 +4,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 
 import 'package:app/game_screen.dart';
+import 'package:app/Intro.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,5 +12,6 @@ void main() {
   Flame.device.setLandscape();
 
   SnowManGame game = SnowManGame(tileSize: 16);
-  runApp(GameWidget(game: kDebugMode ? SnowManGame(tileSize: 16) : game));
+   runApp(GameIntro());
+  //runApp(GameWidget(game: kDebugMode ? SnowManGame(tileSize: 16) : game));
 }

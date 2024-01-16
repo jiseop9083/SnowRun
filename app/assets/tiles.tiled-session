@@ -18,15 +18,15 @@
                 3,
                 10
             ],
-            "scale": 0.33,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 890.9090909090909,
-                "y": -434.84848484848476
+                "x": 358.5,
+                "y": 600.5
             }
         },
         "C:/Users/82102/jiseop/develop/madcamp/temp/leap/examples/standard_platformer/assets/tiles/map.tmx#level_ice_tileset": {
-            "scaleInDock": 1.5
+            "scaleInDock": 3
         },
         "C:/Users/82102/jiseop/develop/madcamp/temp/leap/examples/standard_platformer/assets/tiles/map.tmx#level_standard_tileset": {
             "scaleInDock": 1
@@ -178,10 +178,10 @@
                 2
             ],
             "scale": 1.5,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 251.33333333333331,
-                "y": 275
+                "x": 319.6666666666667,
+                "y": 184.33333333333334
             }
         },
         "tiles/snowTile.tsx": {
@@ -198,14 +198,13 @@
     "openFiles": [
         "tiles/snowTile.tsx",
         "tiles/Level-01.tmx",
-        "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_atmos_forest_2.tsx",
         "C:/Users/82102/jiseop/develop/madcamp/temp/leap/examples/standard_platformer/assets/tiles/map.tmx"
     ],
     "project": "tiles.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "tiles/Level-01.tmx",
         "tiles/snowTile.tsx",
+        "tiles/Level-01.tmx",
         "C:/Users/82102/jiseop/develop/madcamp/temp/leap/examples/standard_platformer/assets/tiles/map.tmx",
         "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/tiles/tile_atmos_forest_2.tsx",
         "C:/Users/82102/jiseop/develop/madcamp/temp/super_dash/assets/map/anim/spritesheet_dash_deathDrown.tsx",
