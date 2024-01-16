@@ -44,8 +44,7 @@ bool checkCollision(player, block) {
         playerX < blockX + blockWidth &&
         playerX + playerWidth > blockX);
   } else {
-    fixedY = playerY;
-    return (fixedY < blockY + blockHeight &&
+    return (playerY < blockY + blockHeight &&
         playerY + playerHeight > blockY &&
         playerX < blockX + blockWidth &&
         playerX + playerWidth > blockX);

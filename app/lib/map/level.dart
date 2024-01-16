@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 
-import 'package:app/Components/collistion_block.dart';
+import 'package:app/Components/collistionBlock.dart';
 import 'package:app/Components/Player.dart';
 
 class Level extends World {

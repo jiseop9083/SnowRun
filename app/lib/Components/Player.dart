@@ -1,7 +1,9 @@
-import 'package:app/Components/collistion_block.dart';
+import 'package:app/Components/collistionBlock.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
+import 'dart:math';
+
 import 'package:app/util/Collision.dart';
 import 'package:app/Components/PlayerHixbox.dart';
 
@@ -32,7 +34,8 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   bool isAnimationChanged = false;
   int moveDirection = 0;
   bool isRolling = false;
-  int rollingCounter = 0;
+  bool isOnSlope = false;
+  int rollingCounter = -1;
 
   // animations
   late final SpriteAnimation _idleAnimation;
@@ -69,9 +72,26 @@ class Player extends SpriteAnimationComponent with HasGameRef {
     if (rollingCounter > 0) {
       rollingCounter--;
     }
-    if (rollingCounter == 0 && isRolling) _stateRolling();
+    if (rollingCounter == 0 && isRolling == false) {
+      _startRolling();
+      rollingCounter = -1;
+      isRolling = true;
+    }
     if (isRolling) {
-      angle += 0.05 * (position.x - previousPos.x);
+      double dx = (position.x - previousPos.x);
+      double absdx = dx < 0 ? -dx : dx;
+      angle += 0.05 * dx;
+      hitbox.width = min((hitbox.width + 0.48 * absdx), 96).toInt().toDouble();
+      hitbox.height =
+          min((hitbox.height + (0.44 * absdx)), 88).toInt().toDouble();
+      size.x = min(size.x + 1.28 * absdx, 256).toInt().toDouble();
+      size.y = min(size.y + 1.28 * absdx, 256).toInt().toDouble();
+      hitbox.offsetX = (size.x - hitbox.width) / 2;
+      hitbox.offsetY = (size.y - hitbox.height) / 2;
+      print("ddd");
+      print(size.y);
+      print(hitbox.height);
+      print(hitbox.offsetY);
     }
     previousPos.x = position.x;
     previousPos.y = position.y;
@@ -97,22 +117,35 @@ class Player extends SpriteAnimationComponent with HasGameRef {
 
   void rolling() {
     if (isRolling) {
-      print("stop rolling");
+      animationMode = PlayerState.idle;
+      isRolling = false;
+      hitbox = PlayerHitbox(
+          offsetX: hitbox.offsetX,
+          offsetY: (size.y - (hitbox.height * 2)) / 2,
+          width: hitbox.width,
+          height: hitbox.height * 2);
+      animation = animations[animationMode];
+      isAnimationChanged = false;
+      angle = 0;
       return;
     }
     animationMode = PlayerState.rolling;
     isAnimationChanged = true;
-    isRolling = true;
-    rollingCounter = 80;
+    rollingCounter = 70;
     animation = animations[animationMode];
     isAnimationChanged = false;
   }
 
-  void _stateRolling() {
+  void _startRolling() {
     animationMode = PlayerState.head;
     animation = animations[animationMode];
     isAnimationChanged = false;
-    hitbox = PlayerHitbox(offsetX: 40, offsetY: 40, width: 48, height: 44);
+    // 왜인지 모르겠지만 size > height * offsetY * 2 일때 충돌 정상 작동
+    hitbox = PlayerHitbox(
+        offsetX: hitbox.offsetX,
+        offsetY: (size.y - (hitbox.height / 2)) / 2,
+        width: hitbox.width,
+        height: hitbox.height / 2);
     // add(RectangleHitbox(
     //     position: Vector2(hitbox.offsetX, hitbox.offsetY),
     //     size: Vector2(hitbox.width, hitbox.height)));
@@ -153,8 +186,10 @@ class Player extends SpriteAnimationComponent with HasGameRef {
     for (final block in collisionBlocks) {
       if (block.isSlope) {
         if (checkCollision(this, block)) {
+          isOnSlope = true;
           final playerX = position.x - (hitbox.width / 2); // center
           if (velocity.y != 0 || velocity.x != 0) {
+            velocity.x = (block.leftTop - block.rightTop).toDouble();
             double m;
             double n;
             if (block.rightTop > block.leftTop) {
@@ -207,7 +242,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
           if (checkCollision(this, block)) {
             if (velocity.y > 0) {
               velocity.y = 0;
-              position.y = block.y - (height / 2 - hitbox.offsetY);
+              position.y = block.y - (hitbox.height / 2);
               isOnGround = true;
               position.x = temp.x;
               continue;
