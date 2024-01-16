@@ -45,7 +45,12 @@ class SnowManGame extends LeapGame with TapCallbacks {
     super.onTapDown(event);
     if (!event.handled) {
       final touchPoint = event.canvasPosition;
-      if (touchPoint.y <= size.y / 2) {
+      if (player.position.y - (player.hitbox.height / 2) <= touchPoint.y &&
+          touchPoint.y <= player.position.y + (player.hitbox.height / 2) &&
+          player.position.x <= touchPoint.x &&
+          touchPoint.x <= player.position.x + player.hitbox.width) {
+        player.rolling();
+      } else if (touchPoint.y <= size.y / 2) {
         // jump
         player.jump();
       } else if (touchPoint.y > size.y / 2 && touchPoint.x > size.x / 2) {

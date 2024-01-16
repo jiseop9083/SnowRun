@@ -15,18 +15,18 @@
                 12
             ],
             "expandedObjectLayers": [
-                3,
-                10
+                10,
+                3
             ],
-            "scale": 0.33,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 890.9090909090909,
-                "y": -434.84848484848476
+                "x": 360.5,
+                "y": 602.5
             }
         },
         "C:/Users/82102/jiseop/develop/madcamp/temp/leap/examples/standard_platformer/assets/tiles/map.tmx#level_ice_tileset": {
-            "scaleInDock": 1.5
+            "scaleInDock": 3
         },
         "C:/Users/82102/jiseop/develop/madcamp/temp/leap/examples/standard_platformer/assets/tiles/map.tmx#level_standard_tileset": {
             "scaleInDock": 1
@@ -174,14 +174,14 @@
         },
         "tiles/Level-01.tmx": {
             "expandedObjectLayers": [
-                4,
-                2
+                2,
+                4
             ],
             "scale": 1.5,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 251.33333333333331,
-                "y": 275
+                "x": 198.33333333333331,
+                "y": 160.33333333333337
             }
         },
         "tiles/snowTile.tsx": {

@@ -34,6 +34,11 @@ flutter:
     - assets/images/snowman_jump.png
     - assets/images/snowman_walk.png
     - assets/images/snowman_melt.png
+    - assets/images/snowman_rhythm.png
+    - assets/images/snowman_rolling_body.png
+    - assets/images/snowman_rolling_feet.png
+    - assets/images/snowman_rolling_head.png
+    - assets/images/snowman_rolling.png
     - assets/audio/main_bgm.mp3
   
 
