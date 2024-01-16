@@ -9,7 +9,7 @@ import 'package:app/map/Level.dart';
 import 'package:app/Components/Player.dart';
 //import 'package:app/util/AudioManager.dart';
 
-class SnowManGame extends LeapGame with TapCallbacks {
+class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
   SnowManGame({
     required super.tileSize,
   });
@@ -22,6 +22,8 @@ class SnowManGame extends LeapGame with TapCallbacks {
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
+
+    //final context = gameRef.buildContext;
 
     // Default the camera size to the bounds of the Tiled map.
     final world = Level(player: player);

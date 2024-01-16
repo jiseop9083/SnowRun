@@ -18,6 +18,8 @@ dependencies:
   flame_tiled: ^1.18.3
   flame_audio: ^2.1.7
   leap: ^0.2.1
+  lottie: ^3.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -40,5 +42,11 @@ flutter:
     - assets/images/snowman_rolling_head.png
     - assets/images/snowman_rolling.png
     - assets/audio/main_bgm.mp3
+    - assets/lottie/
+
+  fonts:
+  - family: main
+    fonts:
+      - asset: assets/fonts/DOSMyungjo.ttf
   
 
