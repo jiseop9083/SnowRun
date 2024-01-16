@@ -16,6 +16,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   List<CollisionBlock> collisionBlocks = [];
   PlayerHitbox hitbox =
       PlayerHitbox(offsetX: 40, offsetY: 20, width: 48, height: 88);
+  late RectangleHitbox rectHitbox;
 
   late PlayerState animationMode;
   var animations = {};
@@ -58,9 +59,10 @@ class Player extends SpriteAnimationComponent with HasGameRef {
     super.onLoad();
     await _loadAnimations();
     debugMode = true;
-    add(RectangleHitbox(
+    rectHitbox = RectangleHitbox(
         position: Vector2(hitbox.offsetX, hitbox.offsetY),
-        size: Vector2(hitbox.width, hitbox.height)));
+        size: Vector2(hitbox.width, hitbox.height));
+    add(rectHitbox);
     animationMode = PlayerState.idle;
     isAnimationChanged = true;
   }
@@ -71,6 +73,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
 
     if (rollingCounter > 0) {
       rollingCounter--;
+      print(rollingCounter);
     }
     if (rollingCounter == 0 && isRolling == false) {
       _startRolling();
@@ -88,10 +91,16 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       size.y = min(size.y + 1.28 * absdx, 256).toInt().toDouble();
       hitbox.offsetX = (size.x - hitbox.width) / 2;
       hitbox.offsetY = (size.y - hitbox.height) / 2;
-      print("ddd");
-      print(size.y);
-      print(hitbox.height);
-      print(hitbox.offsetY);
+      remove(rectHitbox);
+      hitbox = PlayerHitbox(
+          offsetX: hitbox.offsetX,
+          offsetY: hitbox.offsetY,
+          width: hitbox.width,
+          height: hitbox.height);
+      rectHitbox = RectangleHitbox(
+          position: Vector2(hitbox.offsetX, hitbox.offsetY),
+          size: Vector2(hitbox.width, hitbox.height));
+      add(rectHitbox);
     }
     previousPos.x = position.x;
     previousPos.y = position.y;
@@ -124,6 +133,12 @@ class Player extends SpriteAnimationComponent with HasGameRef {
           offsetY: (size.y - (hitbox.height * 2)) / 2,
           width: hitbox.width,
           height: hitbox.height * 2);
+      remove(rectHitbox);
+      rectHitbox = RectangleHitbox(
+          position: Vector2(hitbox.offsetX, hitbox.offsetY),
+          size: Vector2(hitbox.width, hitbox.height));
+      add(rectHitbox);
+
       animation = animations[animationMode];
       isAnimationChanged = false;
       angle = 0;
@@ -131,7 +146,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
     }
     animationMode = PlayerState.rolling;
     isAnimationChanged = true;
-    rollingCounter = 70;
+    rollingCounter = 90;
     animation = animations[animationMode];
     isAnimationChanged = false;
   }
@@ -146,9 +161,12 @@ class Player extends SpriteAnimationComponent with HasGameRef {
         offsetY: (size.y - (hitbox.height / 2)) / 2,
         width: hitbox.width,
         height: hitbox.height / 2);
-    // add(RectangleHitbox(
-    //     position: Vector2(hitbox.offsetX, hitbox.offsetY),
-    //     size: Vector2(hitbox.width, hitbox.height)));
+
+    remove(rectHitbox);
+    rectHitbox = RectangleHitbox(
+        position: Vector2(hitbox.offsetX, hitbox.offsetY),
+        size: Vector2(hitbox.width, hitbox.height));
+    add(rectHitbox);
   }
 
   void _updatePlayerState() {
@@ -336,7 +354,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
     _rollingAnimation = rollingSpriteSheet.createAnimation(
       row: 0,
       loop: false,
-      stepTime: 0.2,
+      stepTime: 0.3,
       to: 4,
     );
 
