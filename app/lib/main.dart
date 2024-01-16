@@ -11,7 +11,7 @@ void main() {
   Flame.device.fullScreen();
   Flame.device.setLandscape();
 
-  SnowManGame game = SnowManGame(tileSize: 16);
-   runApp(GameIntro());
-  //runApp(GameWidget(game: kDebugMode ? SnowManGame(tileSize: 16) : game));
+  SnowManGame game = SnowManGame(tileSize: 64);
+   // runApp(GameIntro());
+  runApp(GameWidget(game: kDebugMode ? SnowManGame(tileSize: 64) : game));
 }

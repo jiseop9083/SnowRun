@@ -3,16 +3,19 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "tiles/tree_2.tsx",
     "expandedProjectPaths": [
+        ".",
+        "tiles"
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "C:/Users/THLEE/Documents/카카오톡 받은 파일/map.tmx": {
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 684,
-                "y": 239
+                "x": 1025,
+                "y": 309
             }
         },
         "C:/Users/THLEE/Documents/카카오톡 받은 파일/map.tmx#level_ice_tileset": {
@@ -25,15 +28,28 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "tiles/BG.tsx": {
+            "scaleInDock": 0.12,
+            "scaleInEditor": 1
+        },
+        "tiles/BG_ai.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/BG_larger.tsx": {
+            "scaleInDock": 0.33,
+            "scaleInEditor": 1
+        },
         "tiles/Game.tmx": {
             "expandedObjectLayers": [
+                11,
                 6
             ],
-            "scale": 1,
-            "selectedLayer": 4,
+            "scale": 0.33,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 2733,
-                "y": 945.5
+                "x": 2707.5757575757575,
+                "y": 787.8787878787879
             }
         },
         "tiles/Level-01.tmx": {
@@ -43,6 +59,16 @@
                 "x": 320.3508771929825,
                 "y": 184.2105263157895
             }
+        },
+        "tiles/crystal.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/game.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.33,
+            "scaleInEditor": 1
         },
         "tiles/game_2.tsx": {
             "scaleInDock": 1,
@@ -56,33 +82,55 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "tiles/game_5.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
         "tiles/game_6.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.12,
             "scaleInEditor": 1
         },
         "tiles/game_7.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
-        "tiles/sign_2.tsx": {
+        "tiles/icebox.tsx": {
             "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/igloo.tsx": {
+            "scaleInDock": 0.12,
+            "scaleInEditor": 1
+        },
+        "tiles/sign_1.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "tiles/sign_2.tsx": {
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "tiles/snowTile.tsx": {
             "scaleInDock": 1
         },
         "tiles/stone.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.12,
             "scaleInEditor": 1
         },
         "tiles/tileset.tsx": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "tiles/tileset_2.tsx": {
+            "scaleInDock": 1.5,
             "scaleInEditor": 1
         },
         "tiles/tree_1.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "tiles/tree_2.tsx": {
+            "scaleInDock": 0.5,
             "scaleInEditor": 1
         }
     },
@@ -92,23 +140,45 @@
     "map.tileWidth": 64,
     "map.width": 60,
     "openFiles": [
+        "tiles/Game.tmx",
+        "C:/Users/THLEE/Documents/카카오톡 받은 파일/map.tmx",
+        "tiles/game_5.tsx",
+        "tiles/game_6.tsx",
+        "tiles/stone.tsx",
+        "tiles/stone.tsx",
+        "tiles/tree_2.tsx",
+        "tiles/sign_2.tsx",
+        "tiles/igloo.tsx",
+        "tiles/sign_1.tsx",
+        "tiles/BG.tsx",
+        "tiles/BG_ai.tsx",
+        "tiles/BG_ai.tsx",
+        "tiles/BG_ai.tsx",
+        "tiles/BG_larger.tsx",
+        "tiles/game_7.tsx",
+        "tiles/icebox.tsx",
+        "tiles/crystal.tsx",
+        "tiles/crystal.tsx",
+        "tiles/tree_1.tsx",
+        "tiles/game.tsx"
     ],
     "project": "game.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "tiles/tree_1.tsx",
-        "tiles/tileset.tsx",
-        "tiles/stone.tsx",
-        "tiles/sign_2.tsx",
+        "tiles/Game.tmx",
+        "C:/Users/THLEE/Documents/카카오톡 받은 파일/map.tmx",
+        "tiles/game_5.tsx",
         "tiles/game_6.tsx",
+        "tiles/stone.tsx",
+        "tiles/game.tsx",
+        "tiles/tree_1.tsx",
+        "tiles/crystal.tsx",
+        "tiles/icebox.tsx",
         "tiles/game_7.tsx",
-        "tiles/game_2.tsx",
-        "tiles/game_3.tsx",
-        "tiles/game_4.tsx",
-        "tiles/tileset_2.tsx",
-        "main_tileset.tsx",
-        "tiles/Level-01.tmx"
+        "tiles/BG_larger.tsx",
+        "tiles/BG_ai.tsx"
     ],
+    "resizeMap.removeObjects": false,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 64,

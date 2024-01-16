@@ -29,10 +29,11 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
     final world = Level(player: player);
     cam = CameraComponent.withFixedResolution(
       world: world,
-      width: tileSize * 40,
-      height: tileSize * 23,
+      width: tileSize * 24,
+      height: tileSize * 18,
     );
-    cam.viewfinder.anchor = Anchor.topLeft;
+    //cam.scale.setValues(2.0, 2.0);  // 예를 들어, 확대를 위해 2.0으로 설정
+    cam.viewfinder.anchor = Anchor.centerLeft;
 
     addAll([cam, world]); //player
     // audioManager.initialize();
