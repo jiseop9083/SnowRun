@@ -15,5 +15,6 @@ void main() {
   runApp(MaterialApp(
     home: GameIntro(),
   ));
-  //runApp(GameWidget(game: kDebugMode ? SnowManGame(tileSize: 64) : game));
+
+  // runApp(GameWidget(game: kDebugMode ? SnowManGame(tileSize: 64) : game));
 }
