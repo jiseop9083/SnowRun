@@ -67,7 +67,10 @@ class GameIntro extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => GameWidget(game: SnowManGame(tileSize: 64))),
+
+                        builder: (context) =>
+                            GameWidget(game: SnowManGame(tileSize: 64))),
+
                   );
                 },
                 child: Text(
