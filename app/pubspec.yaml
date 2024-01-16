@@ -32,8 +32,8 @@ flutter:
   assets:
     - assets/tiles/
     - assets/images/
-    - assets/lottie/
     - assets/audio/main_bgm.mp3
+    - assets/lottie/
     
 
   fonts:

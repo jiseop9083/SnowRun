@@ -14,7 +14,9 @@ class Level extends World {
 
   @override
   FutureOr<void> onLoad() async {
-    level = await TiledComponent.load('temp2.tmx', Vector2.all(16));
+    print("before file loaded");
+    level = await TiledComponent.load('Game.tmx', Vector2.all(64));
+    print("file loaded");
     add(level);
     final metaDataLayer = level.tileMap.getLayer<ObjectGroup>('Metadata');
     for (final metaData in metaDataLayer!.objects) {
