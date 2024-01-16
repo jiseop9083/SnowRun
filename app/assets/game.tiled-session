@@ -1,0 +1,106 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "C:/Users/THLEE/Documents/카카오톡 받은 파일/map.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 780,
+                "y": 239
+            }
+        },
+        "C:/Users/THLEE/Documents/카카오톡 받은 파일/map.tmx#level_ice_tileset": {
+            "scaleInDock": 1
+        },
+        "C:/Users/THLEE/Documents/카카오톡 받은 파일/map.tmx#level_standard_tileset": {
+            "scaleInDock": 1
+        },
+        "main_tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/Level-01.tmx": {
+            "scale": 1.4249999999999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.3508771929825,
+                "y": 184.2105263157895
+            }
+        },
+        "tiles/game_2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/game_3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/game_4.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/game_6.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/game_7.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/sign_2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/snowTile.tsx": {
+            "scaleInDock": 1
+        },
+        "tiles/stone.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tileset.tsx": {
+            "scaleInEditor": 1
+        },
+        "tiles/tileset_2.tsx": {
+            "scaleInEditor": 1
+        },
+        "tiles/tree_1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/THLEE/Desktop/KAIST/MadCampW3/app/assets/images",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "map.width": 60,
+    "openFiles": [
+    ],
+    "project": "game.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "tiles/tree_1.tsx",
+        "tiles/tileset.tsx",
+        "tiles/stone.tsx",
+        "tiles/sign_2.tsx",
+        "tiles/game_6.tsx",
+        "tiles/game_7.tsx",
+        "tiles/game_2.tsx",
+        "tiles/game_3.tsx",
+        "tiles/game_4.tsx",
+        "tiles/tileset_2.tsx",
+        "main_tileset.tsx",
+        "tiles/Level-01.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}
