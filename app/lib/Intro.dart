@@ -39,7 +39,7 @@ class GameIntro extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            GameWidget(game: SnowManGame(tileSize: 16))),
+                            GameWidget(game: SnowManGame(tileSize: 64))),
                   );
                 },
                 child: Text(
