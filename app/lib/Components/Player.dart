@@ -13,21 +13,23 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   Vector2 previousPos = Vector2(0, 0);
   Vector2 velocity = Vector2(0, 0);
   Vector2 acceleration = Vector2(0, 0);
+  double slopeLean = 0;
   List<CollisionBlock> collisionBlocks = [];
   PlayerHitbox hitbox =
-      PlayerHitbox(offsetX: 40, offsetY: 20, width: 48, height: 88);
+      PlayerHitbox(offsetX: 80, offsetY: 40, width: 96, height: 176);
   late RectangleHitbox rectHitbox;
 
   late PlayerState animationMode;
   var animations = {};
 
   //constant
-  static const playerSize = 128.0;
-  final double _moveVelocity = 100.8;
+  static const playerSize = 256.0;
+  final double _moveVelocity = 200.0;
 
-  final _jumpPower = 300.0;
-  final double _terminalVelocity = 200;
-  final double _gravity = 9.8;
+  final _jumpPower = 360.0;
+  final double _terminalVelY = 300;
+  final double _terminalVelX = 800;
+  final double _gravity = 10;
 
   // isState
   bool isOnGround = false;
@@ -35,7 +37,9 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   bool isAnimationChanged = false;
   int moveDirection = 0;
   bool isRolling = false;
-  bool isOnSlope = false;
+  bool isLive = true;
+  bool isStop = false;
+
   int rollingCounter = -1;
 
   // animations
@@ -53,6 +57,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
             size: Vector2.all(playerSize),
             anchor: Anchor.center) {
     animationMode = PlayerState.idle;
+    isLive = true;
   }
 
   @override
@@ -76,10 +81,27 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       rollingCounter--;
       print(rollingCounter);
     }
-    if (rollingCounter == 0 && isRolling == false) {
-      _startRolling();
+    if (rollingCounter == 0) {
+      if (isRolling) {
+        hitbox = PlayerHitbox(
+            offsetX: hitbox.offsetX,
+            offsetY: (size.y - (hitbox.height * 2)) / 2,
+            width: hitbox.width,
+            height: hitbox.height * 2);
+        remove(rectHitbox);
+        rectHitbox = RectangleHitbox(
+            position: Vector2(hitbox.offsetX, hitbox.offsetY),
+            size: Vector2(hitbox.width, hitbox.height));
+        add(rectHitbox);
+        angle = 0;
+        animationMode = PlayerState.idle;
+        isAnimationChanged = true;
+        isRolling = false;
+      } else {
+        _startRolling();
+        isRolling = true;
+      }
       rollingCounter = -1;
-      isRolling = true;
     }
     if (isRolling) {
       double dx = (position.x - previousPos.x);
@@ -103,11 +125,13 @@ class Player extends SpriteAnimationComponent with HasGameRef {
           size: Vector2(hitbox.width, hitbox.height));
       add(rectHitbox);
     }
+
     previousPos.x = position.x;
     previousPos.y = position.y;
     super.update(dt);
     _applyGravity(dt);
     _updatePlayerMovement(dt);
+    slopeLean = 0;
     _checkCollisions();
     _updatePlayerState();
   }
@@ -127,27 +151,16 @@ class Player extends SpriteAnimationComponent with HasGameRef {
 
   void rolling() {
     if (isRolling) {
-      animationMode = PlayerState.idle;
-      isRolling = false;
-      hitbox = PlayerHitbox(
-          offsetX: hitbox.offsetX,
-          offsetY: (size.y - (hitbox.height * 2)) / 2,
-          width: hitbox.width,
-          height: hitbox.height * 2);
-      remove(rectHitbox);
-      rectHitbox = RectangleHitbox(
-          position: Vector2(hitbox.offsetX, hitbox.offsetY),
-          size: Vector2(hitbox.width, hitbox.height));
-      add(rectHitbox);
+      rollingCounter = 80;
+      angle = 0;
 
+      animationMode = PlayerState.goout;
       animation = animations[animationMode];
       isAnimationChanged = false;
-      angle = 0;
       return;
     }
     animationMode = PlayerState.goin;
-    isAnimationChanged = true;
-    rollingCounter = 200;
+    rollingCounter = 80;
     animation = animations[animationMode];
     isAnimationChanged = false;
   }
@@ -171,6 +184,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   }
 
   void _updatePlayerState() {
+    if (isStop) return;
     // idle
     if (animationMode != PlayerState.idle &&
         velocity.x == 0 &&
@@ -195,20 +209,31 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       flipHorizontallyAroundCenter();
       isFacingRight = true;
     }
-    if (isRolling == false && isAnimationChanged) {
+    if ((rollingCounter < 0 && !isRolling) && isAnimationChanged) {
       animation = animations[animationMode];
       isAnimationChanged = false;
     }
   }
 
   void _checkCollisions() {
+    slopeLean = 0.0;
     for (final block in collisionBlocks) {
+      if (block.isWater) {
+        if (checkCollision(this, block)) {
+          // DOTO : conver gameover log
+          isStop = true;
+          animationMode = PlayerState.melt;
+          animation = animations[animationMode];
+          isLive = false;
+          continue;
+        }
+      }
       if (block.isSlope) {
         if (checkCollision(this, block)) {
-          isOnSlope = true;
+          slopeLean =
+              ((block.leftTop - block.rightTop).toDouble() / block.width);
           final playerX = position.x - (hitbox.width / 2); // center
           if (velocity.y != 0 || velocity.x != 0) {
-            velocity.x = (block.leftTop - block.rightTop).toDouble();
             double m;
             double n;
             if (block.rightTop > block.leftTop) {
@@ -232,8 +257,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
         if (checkCollision(this, block)) {
           if (velocity.y > 0) {
             velocity.y = 0;
-            position.y =
-                block.y - (height - (hitbox.height / 2) - hitbox.offsetY);
+            position.y = block.y - (hitbox.height / 2);
             isOnGround = true;
             break;
           }
@@ -282,13 +306,19 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   void _updatePlayerMovement(double dt) {
     if (velocity.y > _gravity) isOnGround = false;
 
-    velocity.x = _moveVelocity * moveDirection;
+    velocity.x =
+        _moveVelocity * moveDirection + (slopeLean * (isRolling ? 300 : 40));
+    if (moveDirection == 0) velocity.x += (slopeLean * (isRolling ? 300 : 0));
+    if (velocity.x < 0)
+      velocity.x = min(velocity.x, _terminalVelX);
+    else
+      velocity.x = max(velocity.x, -_terminalVelX);
     position.x += velocity.x * dt;
   }
 
   void _applyGravity(double dt) {
     velocity.y += _gravity;
-    velocity.y = velocity.y.clamp(-_jumpPower, _terminalVelocity);
+    velocity.y = velocity.y.clamp(-_jumpPower, _terminalVelY);
     position.y += velocity.y * dt;
     //position = gravity.update(position, velocity, acceleration);
   }

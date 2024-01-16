@@ -14,9 +14,7 @@ class Level extends World {
 
   @override
   FutureOr<void> onLoad() async {
-    print("before file loaded");
     level = await TiledComponent.load('Game.tmx', Vector2.all(64));
-    print("file loaded");
     add(level);
     final metaDataLayer = level.tileMap.getLayer<ObjectGroup>('Metadata');
     for (final metaData in metaDataLayer!.objects) {
@@ -33,6 +31,15 @@ class Level extends World {
     if (collisionsLayer != null) {
       for (final collision in collisionsLayer!.objects) {
         switch (collision.class_) {
+          case 'Water':
+            final water = CollisionBlock(
+              position: Vector2(collision.x, collision.y),
+              size: Vector2(collision.width, collision.height),
+              isWater: true,
+            );
+            collisionBlocks.add(water);
+            add(water);
+            break;
           case 'Platform':
             final platform = CollisionBlock(
               position: Vector2(collision.x, collision.y),
