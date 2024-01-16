@@ -12,6 +12,8 @@ void main() {
   Flame.device.setLandscape();
 
   SnowManGame game = SnowManGame(tileSize: 16);
-   runApp(GameIntro());
+  runApp(MaterialApp(
+    home: GameIntro(),
+  ));
   //runApp(GameWidget(game: kDebugMode ? SnowManGame(tileSize: 16) : game));
 }

@@ -7,7 +7,7 @@ import 'dart:math';
 import 'package:app/util/Collision.dart';
 import 'package:app/Components/PlayerHixbox.dart';
 
-enum PlayerState { idle, jump, walk, melt, rolling, head }
+enum PlayerState { idle, jump, walk, melt, goin, goout, roll }
 
 class Player extends SpriteAnimationComponent with HasGameRef {
   Vector2 previousPos = Vector2(0, 0);
@@ -43,8 +43,9 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   late final SpriteAnimation _jumpAnimation;
   late final SpriteAnimation _walkAnimation;
   late final SpriteAnimation _meltAnimation;
-  late final SpriteAnimation _rollingAnimation;
-  late final SpriteAnimation _headAnimation;
+  late final SpriteAnimation _goinAnimation;
+  late final SpriteAnimation _gooutAnimation;
+  late final SpriteAnimation _rollAnimation;
 
   Player({position})
       : super(
@@ -144,15 +145,15 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       angle = 0;
       return;
     }
-    animationMode = PlayerState.rolling;
+    animationMode = PlayerState.goin;
     isAnimationChanged = true;
-    rollingCounter = 90;
+    rollingCounter = 200;
     animation = animations[animationMode];
     isAnimationChanged = false;
   }
 
   void _startRolling() {
-    animationMode = PlayerState.head;
+    animationMode = PlayerState.roll;
     animation = animations[animationMode];
     isAnimationChanged = false;
     // 왜인지 모르겠지만 size > height * offsetY * 2 일때 충돌 정상 작동
@@ -313,13 +314,18 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       srcSize: Vector2(64, 64),
     );
 
-    final rollingSpriteSheet = SpriteSheet(
-      image: await gameRef.images.load('snowman_rolling.png'),
+    final goinSpriteSheet = SpriteSheet(
+      image: await gameRef.images.load('snowman_in.png'),
       srcSize: Vector2(64, 64),
     );
 
-    final headSpriteSheet = SpriteSheet(
-      image: await gameRef.images.load('snowman_rolling_head.png'),
+    final gooutSpriteSheet = SpriteSheet(
+      image: await gameRef.images.load('snowman_out.png'),
+      srcSize: Vector2(64, 64),
+    );
+
+    final rollSpriteSheet = SpriteSheet(
+      image: await gameRef.images.load('snowman_roll.png'),
       srcSize: Vector2(64, 64),
     );
 
@@ -351,14 +357,21 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       to: 7,
     );
 
-    _rollingAnimation = rollingSpriteSheet.createAnimation(
+    _goinAnimation = goinSpriteSheet.createAnimation(
       row: 0,
       loop: false,
-      stepTime: 0.3,
-      to: 4,
+      stepTime: 0.5,
+      to: 6,
     );
 
-    _headAnimation = headSpriteSheet.createAnimation(
+    _gooutAnimation = gooutSpriteSheet.createAnimation(
+      row: 0,
+      loop: false,
+      stepTime: 0.5,
+      to: 6,
+    );
+
+    _rollAnimation = rollSpriteSheet.createAnimation(
       row: 0,
       loop: true,
       stepTime: 1,
@@ -370,8 +383,9 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       PlayerState.jump: _jumpAnimation,
       PlayerState.walk: _walkAnimation,
       PlayerState.melt: _meltAnimation,
-      PlayerState.rolling: _rollingAnimation,
-      PlayerState.head: _headAnimation
+      PlayerState.goin: _goinAnimation,
+      PlayerState.goout: _gooutAnimation,
+      PlayerState.roll: _rollAnimation
     };
   }
 }
