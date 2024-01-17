@@ -239,7 +239,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
           isLive = false;
           animationMode = PlayerState.idle;
           animation = animations[animationMode];
-          dis *= 3;
+          dis = dis * 3;
           continue;
         }
       }

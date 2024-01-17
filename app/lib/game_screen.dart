@@ -48,10 +48,10 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
     super.onTapDown(event);
     final touchPoint = event.canvasPosition;
     if (hud.isOver &&
-        310 < touchPoint.x &&
-        touchPoint.x < 310 + 130 &&
-        305 < touchPoint.y &&
-        touchPoint.y < 305 + 20) {
+        300 < touchPoint.x &&
+        touchPoint.x < 440 &&
+        270 < touchPoint.y &&
+        touchPoint.y < 310) {
       restartGame();
     }
     if (!event.handled && !player.isStop) {
@@ -78,12 +78,11 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
   }
 
   void restartGame() {
-    print('Game Restarted!');
-
     player = Player();
 
     hud = Hud();
     audioManager = AudioManager();
+    removeAll([cam, world]);
     this.onLoad();
   }
 
