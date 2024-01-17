@@ -6,7 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 const String apiUrl = "http://172.10.7.69:80";
 
 Future<bool> checkNewUser(String nickname) async {
-  final response = await http.get(Uri.parse('$apiUrl/new_user/?user_id=$nickname'));
+  final response =
+      await http.get(Uri.parse('$apiUrl/new_user/?user_id=$nickname'));
   return json.decode(response.body);
 }
 
@@ -17,8 +18,8 @@ Future<int> createUser(String nickname, String password) async {
     body: json.encode({'user_id': nickname, 'password': password}),
   );
   // HTTP 요청이 성공적으로 처리되었습니다.
-    var data = json.decode(response.body);
-    return data['user_index'];
+  var data = json.decode(response.body);
+  return data['user_index'];
 }
 
 Future<dynamic> loginUser(String nickname, String password) async {
