@@ -1,17 +1,13 @@
-
 import 'package:app/signUp.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:app/game_screen.dart';
 import '../functional.dart';
 
-
-
-// class Login extends StatefulWidget {
-//   @override
-//   _LoginState createState() => _LoginState();
-// }
-
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
 
 class _LoginState extends State<Login> {
   final TextEditingController _nicknameController = TextEditingController();
@@ -102,5 +98,3 @@ class _LoginState extends State<Login> {
     );
   }
 }
-
-

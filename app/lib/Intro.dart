@@ -54,6 +54,10 @@ class GameIntro extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Login()),
+                  );
                   // '로그인' 버튼 누를 때 로그인 화면으로 이동
                 },
                 child: Text(

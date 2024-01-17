@@ -5,7 +5,6 @@ import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
-import 'package:flame/experimental.dart';
 
 import 'package:app/map/Level.dart';
 import 'package:app/Components/Player.dart';
@@ -17,8 +16,9 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
     required super.tileSize,
   });
 
-  late final CameraComponent cam;
+  late CameraComponent cam; // finl
   Player player = Player();
+  Hud hud = Hud();
   AudioManager audioManager = AudioManager();
 
   @override
@@ -32,7 +32,8 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
       height: tileSize * 18,
     );
     cam.viewfinder.anchor = Anchor.topCenter;
-    cam.viewport.add(Hud());
+
+    cam.viewport.add(hud);
     cam.follow(player, horizontalOnly: true);
 
     addAll([cam, world]); //player
@@ -45,9 +46,17 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
   @override
   void onTapDown(TapDownEvent event) {
     super.onTapDown(event);
+    final touchPoint = event.canvasPosition;
+    if (hud.isOver &&
+        310 < touchPoint.x &&
+        touchPoint.x < 310 + 130 &&
+        305 < touchPoint.y &&
+        touchPoint.y < 305 + 20) {
+      restartGame();
+    }
     if (!event.handled && !player.isStop) {
-      final touchPoint = event.canvasPosition;
       final localPoint = cam.globalToLocal(touchPoint);
+
       if (player.position.y - (player.hitbox.height / 2) <= localPoint.y &&
           localPoint.y <= player.position.y + (player.hitbox.height / 2) &&
           player.position.x - (player.hitbox.width / 2) <= localPoint.x &&
@@ -66,6 +75,16 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
     } else {
       player.setMoveDirection(0);
     }
+  }
+
+  void restartGame() {
+    print('Game Restarted!');
+
+    player = Player();
+
+    hud = Hud();
+    audioManager = AudioManager();
+    this.onLoad();
   }
 
   @override
