@@ -18,7 +18,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   PlayerHitbox hitbox =
       PlayerHitbox(offsetX: 80, offsetY: 40, width: 96, height: 176);
   late RectangleHitbox rectHitbox;
-
+  double playTime = 0;
   late PlayerState animationMode;
   var animations = {};
 
@@ -29,7 +29,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   final _jumpPower = 360.0;
   final double _terminalVelY = 300;
   final double _terminalVelX = 800;
-  final double _gravity = 10;
+  final double _gravity = 10.0;
 
   // isState
   bool isOnGround = false;
@@ -76,10 +76,9 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   @override
   void update(double dt) {
     // movement and gravity -> collision detection -> updateState -> rendering
-
+    playTime += dt;
     if (rollingCounter > 0) {
       rollingCounter--;
-      print(rollingCounter);
     }
     if (rollingCounter == 0) {
       if (isRolling) {
@@ -309,7 +308,8 @@ class Player extends SpriteAnimationComponent with HasGameRef {
     velocity.x =
         _moveVelocity * moveDirection + (slopeLean * (isRolling ? 300 : 40));
     if (moveDirection == 0) velocity.x += (slopeLean * (isRolling ? 300 : 0));
-    if (velocity.x < 0)
+    print(velocity.x);
+    if (velocity.x > 0)
       velocity.x = min(velocity.x, _terminalVelX);
     else
       velocity.x = max(velocity.x, -_terminalVelX);

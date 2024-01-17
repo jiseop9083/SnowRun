@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 import 'package:flame/experimental.dart';
 
 import 'package:app/map/Level.dart';
 import 'package:app/Components/Player.dart';
-//import 'package:app/util/AudioManager.dart';
+import 'package:app/util/AudioManager.dart';
+import 'package:app/hud.dart';
 
 class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
   SnowManGame({
@@ -17,16 +19,12 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
 
   late final CameraComponent cam;
   Player player = Player();
-
-  //AudioManager audioManager = AudioManager();
+  AudioManager audioManager = AudioManager();
 
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
 
-    //final context = gameRef.buildContext;
-
-    // Default the camera size to the bounds of the Tiled map.
     final world = Level(player: player);
     cam = CameraComponent.withFixedResolution(
       world: world,
@@ -34,20 +32,20 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
       height: tileSize * 18,
     );
     cam.viewfinder.anchor = Anchor.topCenter;
+    cam.viewport.add(Hud());
     cam.follow(player, horizontalOnly: true);
 
     addAll([cam, world]); //player
-    // audioManager.initialize();
-    // audioManager.playMainBGM();
+    audioManager.initialize();
+    audioManager.playMainBGM();
     return super.onLoad();
   }
 
-  // DO TO : move this code to util/interface.dart
   // DO TO: 터치 후 이동하면 취소 안됨
   @override
   void onTapDown(TapDownEvent event) {
     super.onTapDown(event);
-    if (!event.handled) {
+    if (!event.handled && !player.isStop) {
       final touchPoint = event.canvasPosition;
       final localPoint = cam.globalToLocal(touchPoint);
       if (player.position.y - (player.hitbox.height / 2) <= localPoint.y &&
@@ -65,6 +63,8 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
         //left
         player.setMoveDirection(-1);
       }
+    } else {
+      player.setMoveDirection(0);
     }
   }
 
@@ -78,10 +78,14 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
   }
 
   @override
-  void update(double dt) {
+  void update(double dt) async {
     super.update(dt);
     player.update(dt);
   }
 
-  getWorldPosition(Vector2 pos) {}
+  @override
+  void render(Canvas canvas) {
+    super.render(canvas);
+    //gameOverScreen.render(canvas);
+  }
 }
