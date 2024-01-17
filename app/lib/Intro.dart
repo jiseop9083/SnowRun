@@ -32,6 +32,7 @@ class GameIntro extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   // // Flare 애니메이션
                   // Text(
                   //   'Snowrun',

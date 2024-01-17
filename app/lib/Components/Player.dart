@@ -19,6 +19,7 @@ class Player extends SpriteAnimationComponent with HasGameRef {
       PlayerHitbox(offsetX: 80, offsetY: 40, width: 96, height: 176);
   late RectangleHitbox rectHitbox;
   double playTime = 0;
+  double dis = 0;
   late PlayerState animationMode;
   var animations = {};
 
@@ -64,7 +65,6 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   Future<void> onLoad() async {
     super.onLoad();
     await _loadAnimations();
-    debugMode = true;
     rectHitbox = RectangleHitbox(
         position: Vector2(hitbox.offsetX, hitbox.offsetY),
         size: Vector2(hitbox.width, hitbox.height));
@@ -77,25 +77,41 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   void update(double dt) {
     // movement and gravity -> collision detection -> updateState -> rendering
     playTime += dt;
+    dis = max(dis, position.x);
     if (rollingCounter > 0) {
       rollingCounter--;
     }
     if (rollingCounter == 0) {
       if (isRolling) {
-        hitbox = PlayerHitbox(
-            offsetX: hitbox.offsetX,
-            offsetY: (size.y - (hitbox.height * 2)) / 2,
-            width: hitbox.width,
-            height: hitbox.height * 2);
-        remove(rectHitbox);
-        rectHitbox = RectangleHitbox(
-            position: Vector2(hitbox.offsetX, hitbox.offsetY),
-            size: Vector2(hitbox.width, hitbox.height));
-        add(rectHitbox);
-        angle = 0;
-        animationMode = PlayerState.idle;
-        isAnimationChanged = true;
-        isRolling = false;
+        bool isColl = false;
+        // for (final block in collisionBlocks) {
+        //   if (!block.isPlatform) {
+        //     if (block.y < position.y - (3 * hitbox.height / 2) &&
+        //         position.y - (3 * hitbox.height / 2) < block.y + block.height) {
+        //       isColl = true;
+        //       print(block.y);
+        //       break;
+        //     }
+        //   }
+        // }
+        if (!isColl) {
+          hitbox = PlayerHitbox(
+              offsetX: hitbox.offsetX,
+              offsetY: (size.y - (hitbox.height * 2)) / 2,
+              width: hitbox.width,
+              height: hitbox.height * 2);
+          remove(rectHitbox);
+          rectHitbox = RectangleHitbox(
+              position: Vector2(hitbox.offsetX, hitbox.offsetY),
+              size: Vector2(hitbox.width, hitbox.height));
+          add(rectHitbox);
+          angle = 0;
+          animationMode = PlayerState.idle;
+          isAnimationChanged = true;
+          isRolling = false;
+        } else {
+          animation = animations[PlayerState.roll];
+        }
       } else {
         _startRolling();
         isRolling = true;
@@ -217,9 +233,18 @@ class Player extends SpriteAnimationComponent with HasGameRef {
   void _checkCollisions() {
     slopeLean = 0.0;
     for (final block in collisionBlocks) {
+      if (block.isEnd) {
+        if (checkCollision(this, block)) {
+          isStop = true;
+          isLive = false;
+          animationMode = PlayerState.idle;
+          animation = animations[animationMode];
+          dis *= 3;
+          continue;
+        }
+      }
       if (block.isWater) {
         if (checkCollision(this, block)) {
-          // DOTO : conver gameover log
           isStop = true;
           animationMode = PlayerState.melt;
           animation = animations[animationMode];
@@ -308,12 +333,12 @@ class Player extends SpriteAnimationComponent with HasGameRef {
     velocity.x =
         _moveVelocity * moveDirection + (slopeLean * (isRolling ? 300 : 40));
     if (moveDirection == 0) velocity.x += (slopeLean * (isRolling ? 300 : 0));
-    print(velocity.x);
     if (velocity.x > 0)
       velocity.x = min(velocity.x, _terminalVelX);
     else
       velocity.x = max(velocity.x, -_terminalVelX);
     position.x += velocity.x * dt;
+    position.y += slopeLean * velocity.x * dt;
   }
 
   void _applyGravity(double dt) {

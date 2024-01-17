@@ -8,9 +8,14 @@ import 'package:app/Components/Player.dart';
 
 class Level extends World {
   late Player player;
+
   Level({required this.player});
   late TiledComponent level;
   List<CollisionBlock> collisionBlocks = [];
+
+  setPlayer(Player player) {
+    this.player = player;
+  }
 
   @override
   FutureOr<void> onLoad() async {
@@ -22,6 +27,15 @@ class Level extends World {
         case 'Player':
           player.position = Vector2(metaData.x, metaData.y);
           add(player);
+          break;
+        case 'EndPoint':
+          final endPoint = CollisionBlock(
+            position: Vector2(metaData.x, metaData.y),
+            size: Vector2(metaData.width, metaData.height),
+            isEnd: true,
+          );
+          collisionBlocks.add(endPoint);
+          add(endPoint);
           break;
       }
     }
