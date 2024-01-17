@@ -29,35 +29,36 @@ class GameIntro extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              // 게임 로고 또는 텍스트
-              // Start 버튼
-              // ElevatedButton(
-              //   onPressed: () {
-              //     // Start 버튼 누를 때 다른 화면으로 이동
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) =>
-              //               GameWidget(game: SnowManGame(tileSize: 64))),
-              //     );
-              //   },
-              //   child: Text(
-              //     'Start',
-              //     style: TextStyle(
-              //         color: Colors.yellow, fontSize: 24, fontFamily: 'main'),
-              //   ),
-              // ),
+              ElevatedButton(
+                onPressed: () {
+                  // Start 버튼 누를 때 다른 화면으로 이동
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            GameWidget(game: SnowManGame(tileSize: 64))),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.yellow,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0), // 버튼의 모양을 조절
+                  ),
+                ),
+                child: Text(
+                  'Start',
+                  style: TextStyle(
+                      color: Colors.black, fontSize: 24, fontFamily: 'main'),
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {
                   // '로그인' 버튼 누를 때 로그인 화면으로 이동
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Login()),
-                  );
                 },
                 child: Text(
                   '로그인',
-                  style: TextStyle(color: Colors.yellow, fontSize: 20, fontFamily: 'main'),
+                  style: TextStyle(
+                      color: Colors.yellow, fontSize: 20, fontFamily: 'main'),
                 ),
               ),
               SizedBox(height: 20), // 버튼 사이의 간격
@@ -67,15 +68,14 @@ class GameIntro extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-
                         builder: (context) =>
                             GameWidget(game: SnowManGame(tileSize: 64))),
-
                   );
                 },
                 child: Text(
                   '시작하기',
-                  style: TextStyle(color: Colors.yellow, fontSize: 20, fontFamily: 'main'),
+                  style: TextStyle(
+                      color: Colors.yellow, fontSize: 20, fontFamily: 'main'),
                 ),
               ),
             ],
