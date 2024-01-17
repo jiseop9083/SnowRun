@@ -4,6 +4,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 import 'package:leap/leap.dart';
+import 'package:flame/experimental.dart';
 
 import 'package:app/map/Level.dart';
 import 'package:app/Components/Player.dart';
@@ -29,11 +30,11 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
     final world = Level(player: player);
     cam = CameraComponent.withFixedResolution(
       world: world,
-      width: tileSize * 24,
+      width: tileSize * 29,
       height: tileSize * 18,
     );
-    //cam.scale.setValues(2.0, 2.0);  // 예를 들어, 확대를 위해 2.0으로 설정
-    cam.viewfinder.anchor = Anchor.centerLeft;
+    cam.viewfinder.anchor = Anchor.topCenter;
+    cam.follow(player, horizontalOnly: true);
 
     addAll([cam, world]); //player
     // audioManager.initialize();
@@ -48,10 +49,11 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
     super.onTapDown(event);
     if (!event.handled) {
       final touchPoint = event.canvasPosition;
-      if (player.position.y - (player.hitbox.height / 2) <= touchPoint.y &&
-          touchPoint.y <= player.position.y + (player.hitbox.height / 2) &&
-          player.position.x <= touchPoint.x &&
-          touchPoint.x <= player.position.x + player.hitbox.width) {
+      final localPoint = cam.globalToLocal(touchPoint);
+      if (player.position.y - (player.hitbox.height / 2) <= localPoint.y &&
+          localPoint.y <= player.position.y + (player.hitbox.height / 2) &&
+          player.position.x - (player.hitbox.width / 2) <= localPoint.x &&
+          localPoint.x <= player.position.x + (player.hitbox.width / 2)) {
         player.rolling();
       } else if (touchPoint.y <= size.y / 2) {
         // jump
@@ -80,4 +82,6 @@ class SnowManGame extends LeapGame with TapCallbacks, HasGameRef {
     super.update(dt);
     player.update(dt);
   }
+
+  getWorldPosition(Vector2 pos) {}
 }
