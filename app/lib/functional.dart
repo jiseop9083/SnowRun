@@ -12,11 +12,7 @@ Future<bool> checkNewUser(String nickname) async {
 }
 
 Future<int> createUser(String nickname, String password) async {
-  final response = await http.post(
-    Uri.parse('$apiUrl/users/'),
-    headers: {'Content-Type': 'application/json'},
-    body: json.encode({'user_id': nickname, 'password': password}),
-  );
+  final response = await http.get(Uri.parse('$apiUrl/users/?user_id=$nickname&password=$password'));
   // HTTP 요청이 성공적으로 처리되었습니다.
   var data = json.decode(response.body);
   return data['user_index'];
