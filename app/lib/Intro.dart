@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flame/game.dart';
 import 'package:app/game_screen.dart';
+import '../login.dart';
 
 class GameIntro extends StatelessWidget {
   @override

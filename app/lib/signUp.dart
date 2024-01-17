@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:app/game_screen.dart';
+import '../functional.dart';
 
 
 class signUp extends StatefulWidget {
@@ -11,6 +12,36 @@ class signUp extends StatefulWidget {
 class _signUpState extends State<signUp> {
   final TextEditingController _nicknameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  void _signUp() async {
+    print("startSignUp");
+    String nickname = _nicknameController.text;
+    String password = _passwordController.text;
+    print("nickname: ${nickname}, password: ${password}");
+    dynamic newId = await checkNewUser(nickname);
+    print("${newId}");
+    if (newId == false) {
+      // 로그인 실패 메시지 표시
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('중복되는 아이디입니다.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    } else {
+      dynamic result = await createUser(nickname, password);
+      // user_index를 SharedPreferences에 저장
+      await saveUserIndex(result);
+
+      // 로그인 성공 시 GameWidget으로 이동
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => GameWidget(game: SnowManGame(tileSize: 64)),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +76,8 @@ class _signUpState extends State<signUp> {
               SizedBox(height: 20), // 간격 조절
               // 회원가입하기 버튼
               ElevatedButton(
-                onPressed: () {
-                // 회원가입 로직을 여기에 추가합니다. (예: 서버에 데이터 전송)
-                // 여기서는 예시로 바로 게임 위젯으로 이동합니다.
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GameWidget(game: SnowManGame(tileSize: 64)),
-                    ),
-                  );
-                },
-                child: TextField(
-                  controller: _nicknameController,
-                  decoration: InputDecoration(
-                    labelText: '회원가입하기',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
+                onPressed: _signUp,
+                child: Text('회원가입하기'),
               ),
             ],
           ),
