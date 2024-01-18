@@ -1,9 +1,11 @@
-## 1. 소개
 ![KakaoTalk_20240117_202700706_01](https://github.com/jiseop9083/madcampWeek3/assets/64767436/358f94ab-4052-4e74-a003-6c389f1801b4)
 ![KakaoTalk_20240117_202700706](https://github.com/jiseop9083/madcampWeek3/assets/64767436/3a643263-9a4e-47d1-b32f-6e5a0085be4f)
 
-## Snow Run
-눈사람이 눈덩이로 변해 굴러다니는 2D 플랫포머 게임
+
+## 1. 소개
+** 눈사람이 눈덩이로 변해 굴러다니는 2D 플랫포머 게임입니다**
+**굴러다니면서 여러 장애물들을 통과해보세요!**
+
 
 
 
@@ -14,10 +16,20 @@
 
 ### 개발 환경
 
-- 프론트 엔드: Flutter
-- 백엔드: fastAPI
-- 데이터베이스: mysql
-- 언어: dart, python
+- FE
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=Flutter&logoColor=white"/> 
+- BE
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=FastAPI&logoColor=white"/>
+- DB
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/> 
+- Language
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=flat-square&logo=Dart&logoColor=white"/> <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white"/>
+
+
+
+
+
+
 
 
 ## 2. 규칙
