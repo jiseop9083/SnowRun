@@ -3,9 +3,9 @@
 ![KakaoTalk_20240117_202700706](https://github.com/jiseop9083/madcampWeek3/assets/64767436/3a643263-9a4e-47d1-b32f-6e5a0085be4f)
 
 ## Snow Run
-눈사람이 달리는 게임
+눈사람이 눈덩이로 변해 굴러다니는 2D 플랫포머 게임
 
-</aside>
+
 
 ### 팀원
 
@@ -41,28 +41,28 @@
 - 점수는 시간 대비 이동 거리로 계산됩니다.
     - 도착지점에 도달해 게임이 종료되면 점수는 3배가 됩니다.
 
-## 3. 화면 구성
-
-|제목|내용|설명|
-|------|---|---|
-|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|
-
-전체 맵 플레이
-
-
-
-https://github.com/jiseop9083/madcampWeek3/assets/64767436/c0660cba-7f00-43bd-9c4e-f0bea89fabec
-
-
-회원가입 후 게임 시작
-
-![로그인 후 게임 시작, 게임 종료](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/c37f1f6f-e0dd-4eb8-88dc-9a34df647612/Screen_Recording_20240117_195856.mp4)
-
-로그인 후 게임 시작, 게임 종료
 ### 메인화면
 
 - 로그인을 하고 게임을 플레이 할 수 있습니다.
     - 아이디/password 기반의 로그인을 할 수 있습니다.
 - 로그인 없이 게임을 플레이 할 수 있습니다.
+
+## 3. 플레이 영상
+
+|영상1|영상2|
+|------|---|
+| ![로그인1](https://github.com/jiseop9083/madcampWeek3/assets/64767436/9cfa2aa4-0095-4219-9646-51afa350ba89) |  ![로그인3](https://github.com/jiseop9083/madcampWeek3/assets/64767436/aeff01b0-44b0-41eb-8b73-1e22a7440cea) |
+| ▲ 로그인 화면 | ▲ 로그인 성공 |
+| ![이동1](https://github.com/jiseop9083/madcampWeek3/assets/64767436/8321a001-bcff-440f-87ee-e4e961e36749) |  ![이동2](https://github.com/jiseop9083/madcampWeek3/assets/64767436/1cf41153-b7d5-4638-b486-2978e052df22) |
+| ▲ 이동 화면 | ▲ 플랫폼을 이용한 이동 |
+|  ![구르기1](https://github.com/jiseop9083/madcampWeek3/assets/64767436/c72ba781-9896-48e8-a73a-2811a7b03c4e) | ![구르기2](https://github.com/jiseop9083/madcampWeek3/assets/64767436/043294cb-3395-40f2-a436-bfc0b005df00) |
+| ▲ 구르기 모드 | ▲ 언덕에서 구르기 모드 |
+| ![구르기3](https://github.com/jiseop9083/madcampWeek3/assets/64767436/f0ec85f4-f777-472b-a446-a251b2104935) | ![구르기4](https://github.com/jiseop9083/madcampWeek3/assets/64767436/637ad59c-61d3-4dd9-a067-b0c9469065e4) |
+| ▲ 구르기 모드로 낮은 곳 통과 | ▲ 가파른 언덕 |
+| ![끝1](https://github.com/jiseop9083/madcampWeek3/assets/64767436/8a0ed0a7-6097-45be-b6d3-9a827d091bf1) | ![끝2](https://github.com/jiseop9083/madcampWeek3/assets/64767436/e6ad55f6-f7a3-46b5-bc0b-84d924779c86) | 
+| ▲ 목적지 도달 시 게임 오버 | ▲ 물에 빠졌을 시 게임 오버 |
+
+
+
+
+
